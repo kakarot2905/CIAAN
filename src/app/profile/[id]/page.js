@@ -1,6 +1,6 @@
 'use client';
-
-import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { apiClient } from '@/lib/auth';
 import Navigation from '@/components/Navigation';
@@ -15,13 +15,7 @@ export default function UserProfilePage() {
     const [loadingProfile, setLoadingProfile] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        if (userId) {
-            fetchProfile();
-        }
-    }, [userId]);
-
-    const fetchProfile = async () => {
+    const fetchProfile = useCallback(async () => {
         try {
             setLoadingProfile(true);
             setError(null);
@@ -33,7 +27,13 @@ export default function UserProfilePage() {
         } finally {
             setLoadingProfile(false);
         }
-    };
+    }, [userId]);
+
+    useEffect(() => {
+        if (userId) {
+            fetchProfile();
+        }
+    }, [userId, fetchProfile]);
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -49,12 +49,9 @@ export default function UserProfilePage() {
                         <div className="text-red-600 text-lg mb-4">
                             {error}
                         </div>
-                        <a
-                            href="/"
-                            className="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700"
-                        >
-                            Go Home
-                        </a>
+                            <Link href="/" className="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700">
+                                Go Home
+                            </Link>
                     </div>
                 ) : profileData ? (
                     <div>

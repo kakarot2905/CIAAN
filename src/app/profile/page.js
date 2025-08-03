@@ -121,7 +121,7 @@ export default function ProfilePage() {
                             ) : (
                                 <div className="text-center py-12 bg-white rounded-lg shadow-sm border">
                                     <div className="text-gray-500 text-lg">
-                                        You haven't posted anything yet.
+                                        You haven&apos;t posted anything yet.
                                     </div>
                                     <p className="text-gray-400 mt-2">
                                         Share your first post with the community!
