@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+// Use relative URL for production (same domain) or localhost for development
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 // Create axios instance with credentials
 const api = axios.create({
